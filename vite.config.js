@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'https://studyplanner-backend-2.onrender.com',
+      '/api': 'https://studyplanner-backend-7.onrender.com',
     },
   },
 })

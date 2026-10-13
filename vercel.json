@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://studyplanner-backend-7.onrender.com/api/$1"
+    }
+  ]
+}
