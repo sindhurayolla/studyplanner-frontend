@@ -4,7 +4,8 @@ const API_BASE_URL = (
 ).replace(/\/+$/, "");
 
 export async function api(path, { method = "GET", body, userId } = {}) {
-  const res = await fetch(`${API_BASE_URL}/api${path}`, {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  const res = await fetch(`${API_BASE_URL}/api${cleanPath}`, {
     method,
     headers: {
       ...(body ? { "Content-Type": "application/json" } : {}),
@@ -13,6 +14,6 @@ export async function api(path, { method = "GET", body, userId } = {}) {
     body: body ? JSON.stringify(body) : undefined,
   });
   const data = res.status === 204 ? null : await res.json().catch(() => null);
-  if (!res.ok) throw new Error(data?.error || `Request failed (${res.status})`);
+  if (!res.ok) throw new Error(data?.error || data?.message || `Request failed (${res.status})`);
   return data;
 }
